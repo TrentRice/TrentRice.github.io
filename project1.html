@@ -69,81 +69,102 @@
 	</ul>
 	<p>Full code available on <a href="https://github.com/TrentRice/Pythagorean-Expectation-Sports-Predictions" target="_blank">GitHub</a>.</p>
 
-	<h2>Results</h2>
+<h2>Results Overview</h2>
 
-	<h3>MLB</h3>
-	<ul>
-		<li><strong>Coefficient:</strong> 0.877</li>
-		<li><strong>R-squared:</strong> 0.894</li>
-		<li><strong>P-Value:</strong> 0.000</li>
-		<li><strong>Conclusion:</strong> Strong correlation. The formula accurately predicts win percentage.</li>
-	</ul>
+<h3>Pythagorean Expectation</h3>
 
-	<h3>NHL</h3>
-	<ul>
-		<li><strong>Coefficient:</strong> 1.076</li>
-		<li><strong>R-squared:</strong> 0.902</li>
-		<li><strong>P-Value:</strong> 0.000</li>
-		<li><strong>Conclusion:</strong> High significance. NHL scoring differentials align closely with win percentages.</li>
-	</ul>
-
-	<h3>IPL</h3>
-	<ul>
-		<li><strong>Coefficient:</strong> 3.552</li>
-		<li><strong>R-squared:</strong> 0.234</li>
-		<li><strong>P-Value:</strong> 0.225</li>
-		<li><strong>Conclusion:</strong> Less effective due to format where chasing teams only need 1 more run. Further exploration needed.</li>
-	</ul>
-
-	<h3>NBA</h3>
-	<ul>
-		<li><strong>Coefficient:</strong> 6.554</li>
-		<li><strong>R-squared:</strong> 0.943</li>
-		<li><strong>P-Value:</strong> 0.000</li>
-		<li><strong>Conclusion:</strong> Excellent fit. High scoring in basketball amplifies predictive strength.</li>
-	</ul>
-
-	<h3>English Soccer (4 Leagues)</h3>
-	<ul>
-		<li><strong>Coefficient:</strong> 0.6502</li>
-		<li><strong>R-squared:</strong> 0.934</li>
-		<li><strong>P-Value:</strong> 0.000</li>
-		<li><strong>Conclusion:</strong> Very good fit even in a low-scoring environment like soccer.</li>
-	</ul>
-
-	<h2>Pythagorean as a Predictor</h2>
-
-	<h3>MLB</h3>
+<h4>NHL</h4>
 <ul>
-  <li><strong>Explanation:</strong> First-half stats (pre All-Star Break) were used to calculate Pythagorean. These were then used to predict second-half win percentages.</li>
+  <li><strong>Coefficient:</strong> 1.076</li>
+  <li>For every 0.1 unit increase in Pythagorean, winning percentage increases by 0.1076</li>
+  <li><strong>R-squared:</strong> 0.902</li>
+  <li>Pythagorean accounts for 90.2% of the variation in winning percentage.</li>
+  <li><strong>P-Value:</strong> 0.000</li>
+  <li>P-value &lt; 0.05 — result is statistically significant.</li>
+  <li><strong>Conclusion:</strong> NHL shows strong correlation with Pythagorean Expectation. Scoring differential leads to wins in a clear, predictable way.</li>
+</ul>
+
+<h4>MLB</h4>
+<ul>
+  <li><strong>Coefficient:</strong> 0.877</li>
+  <li>For every 0.1 unit increase in Pythagorean, winning percentage increases by 0.0887</li>
+  <li><strong>R-squared:</strong> 0.894</li>
+  <li>Pythagorean accounts for 89.4% of the variation in winning percentage.</li>
+  <li><strong>P-Value:</strong> 0.000</li>
+  <li>P-value &lt; 0.05 — result is statistically significant.</li>
+  <li><strong>Conclusion:</strong> Strong model fit. MLB results align closely with Pythagorean predictions.</li>
+</ul>
+
+<h4>IPL</h4>
+<ul>
+  <li><strong>Coefficient:</strong> 3.552</li>
+  <li>For every 0.1 unit increase in Pythagorean, winning percentage increases by 0.3552</li>
+  <li><strong>R-squared:</strong> 0.234</li>
+  <li>Pythagorean accounts for 23.4% of the variation in winning percentage.</li>
+  <li><strong>P-Value:</strong> 0.225</li>
+  <li>P-value &gt; 0.05 — not statistically significant.</li>
+  <li><strong>Conclusion:</strong> Pythagorean less effective in IPL. Format allows chasing team to win by only 1 run, limiting predictive power of run differentials.</li>
+</ul>
+
+<h4>NBA</h4>
+<ul>
+  <li><strong>Coefficient:</strong> 6.554</li>
+  <li>For every 0.1 unit increase in Pythagorean, winning percentage increases by 0.6554</li>
+  <li><strong>R-squared:</strong> 0.943</li>
+  <li>Pythagorean accounts for 94.3% of the variation in winning percentage.</li>
+  <li><strong>P-Value:</strong> 0.000</li>
+  <li>P-value &lt; 0.05 — result is statistically significant.</li>
+  <li><strong>Conclusion:</strong> Excellent fit. High-scoring nature of basketball makes Pythagorean particularly effective.</li>
+</ul>
+
+<h4>English Soccer (4 Leagues)</h4>
+<ul>
+  <li><strong>Coefficient:</strong> 0.6502</li>
+  <li>For every 0.1 unit increase in Pythagorean, winning percentage increases by 0.06502</li>
+  <li><strong>R-squared:</strong> 0.934</li>
+  <li>Pythagorean accounts for 93.4% of the variation in winning percentage.</li>
+  <li><strong>P-Value:</strong> 0.000</li>
+  <li>P-value &lt; 0.05 — result is statistically significant.</li>
+  <li><strong>Conclusion:</strong> Strong result even in low-scoring sport. Predictive strength holds in soccer formats.</li>
+</ul>
+
+<h3>Pythagorean Expectation for Predicting Winning Percentage</h3>
+
+<h4>MLB</h4>
+<ul>
+  <li><strong>Explanation:</strong> 
+    First-half data (pre All-Star break) was used to calculate Pythagorean Expectation. This was then used to predict second-half win percentage.
+  </li>
   <li><strong>Correlation Coefficients:</strong>
     <ul>
       <li>Pythagorean → 2nd half win %: 0.69</li>
       <li>1st half win % → 2nd half win %: 0.65</li>
     </ul>
   </li>
-  <li><strong>Conclusion:</strong> Pythagorean was a better predictor of second-half performance than first-half win %.</li>
+  <li><strong>Conclusion:</strong> Pythagorean better predicted second-half performance than first-half win %.</li>
 </ul>
 
-<h3>English Soccer</h3>
+<h4>English Soccer</h4>
 <ul>
-  <li><strong>Explanation:</strong> 2017 season data used for goals scored/conceded. Pythagorean calculated and used to predict 2018 win percentages.</li>
+  <li><strong>Explanation:</strong> 
+    2017 season data (goals scored and conceded) was used to compute Pythagorean, which then predicted 2018 win percentages.
+  </li>
   <li><strong>Correlation Coefficients:</strong>
     <ul>
       <li>2017 Pythagorean → 2018 win %: 0.616</li>
       <li>2017 win % → 2018 win %: 0.602</li>
     </ul>
   </li>
-  <li><strong>Conclusion:</strong> Pythagorean slightly outperformed prior win percentage as a predictor.</li>
+  <li><strong>Conclusion:</strong> Pythagorean slightly outperformed win percentage as a predictor across seasons.</li>
 </ul>
 
-	<h2>Takeaways and Conclusions</h2>
-	<p>
-	In exploring the Pythagorean Expectation across five distinct sports, this project reinforces how a simple statistical model originally conceived for baseball can reveal deeper patterns of team performance across different scoring systems. The model performed strongly in four of five sports, with IPL being the exception—likely due to its unique match structure.
-	</p>
-	<p>
-	Despite being much simpler than modern machine learning models, the Pythagorean Expectation remains a powerful, lightweight tool in the sports analytics toolbox. It offers both accessibility and meaningful insight—making it a valuable method for analysts exploring performance trends in team sports.
-	</p>
+<h2>Takeaways and Conclusions</h2>
+<p>
+In exploring the Pythagorean Expectation across five distinct sports, this project reinforces how a simple statistical model originally conceived for baseball can reveal deeper patterns of team performance across different scoring systems and formats. The model performed best in four out of five sports, with cricket being the outlier—likely due to its unique structure where only one team bats at a time and the second team only needs to surpass the opponent’s score.
+</p>
+<p>
+Compared to today’s machine learning algorithms, the Pythagorean Expectation is a simpler, lower-compute approach, yet it demonstrated strong performance. As sports continue to embrace data-driven decision-making, tools like the Pythagorean Expectation offer both accessibility and analytical depth—making them a crucial part of the modern sports analyst's toolkit.
+</p>
 </section>
 			</div>
 			<footer id="footer">
