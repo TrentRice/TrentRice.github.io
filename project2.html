@@ -61,8 +61,11 @@
   <ul>
     <li>Regression of 1st half vs. 2nd half S%: <strong>0.076</strong> (very low impact)</li>
     <li>Regression plot: Shows sporadic results; likely regression to the mean</li>
+    <img src="images/RegressiontoMeanS%.png" alt="NHL RegMeannS%" style="display: block; margin: 0 auto;" width="500">
     <li>Residuals vs. Fitted: Flat line indicates linear relationship</li>
+    <img src="images/ResidualsvsFittedS%.png" alt="NHL ResidualsS%" style="display: block; margin: 0 auto;" width="500">
     <li>Q-Q plot: Even distribution confirms model fit</li>
+    <img src="images/QQS%.png" alt="NHL QQS%" style="display: block; margin: 0 auto;" width="500">
   </ul>
 
   <h4>2. Shooting Percentage Does Help Win Games</h4>
@@ -73,17 +76,21 @@
     <li>Regression R²: <strong>0.24</strong> (24% of win% variance explained by S%)</li>
     <li>Relationship plot: Upward trend between S% and win%</li>
   </ul>
+  <img src="images/S%vsW%NHL.png" alt="S%vsW%NHL" style="display: block; margin: 0 auto;" width="500">
 
   <h4>3. Unlucky Coaches Are Fired More Often</h4>
   <p>This was one of the most striking results. Coaches with lower-than-average S% had significantly higher firing rates—even when win percentage was controlled.</p>
   <ul>
     <li>Firing rate among "unlucky" coaches: <strong>37.4%</strong></li>
     <li>Firing rate among "lucky" coaches: <strong>27.3%</strong></li>
+    <img src="images/FiringRateNHL.png" alt="FiringRateNHL" style="display: block; margin: 0 auto;" width="500">
+
     <li>Bottom 10 coaching seasons by S% luck: <strong>80%</strong> fired</li>
+    <img src="images/Bottom10CoachNHL.png" alt="Bottom10CoachNHL" style="display: block; margin: 0 auto;" width="500">
     <li>Top 9 coaching seasons by S% luck: <strong>11.1%</strong> fired</li>
+    <img src="images/Top10CoachNHL.png" alt="Top10CoachNHL" style="display: block; margin: 0 auto;" width="500">
   </ul>
   <p>These results suggest that even random variance in S% can impact a coach’s career, raising concerns about fairness and evaluation standards.</p>
-
   <h3>Visualization & Code Access</h3>
   <p>The R code used in this project includes:</p>
   <ul>
@@ -92,15 +99,14 @@
     <li>Coach-season joins with firing status</li>
     <li>Group summaries and tidy visualizations</li>
   </ul>
-  <p>You can explore the full notebooks here:</p>
+  <p>You can explore the full notebooks and data here:</p>
   <ul>
-    <li><a href="#">NHL Shooting % and Luck Analysis</a></li>
-    <li><a href="#">Coach Firings vs. Shooting Percentage</a></li>
+    <li><a href="https://github.com/TrentRice/NHL-CoachFiring-Analysis-R.git"></a></li>
   </ul>
 
   <h3>Conclusion</h3>
-  <p>This project confirms that shooting percentage is not a skill-driven stat at the team level, but it still matters—both on the scoreboard and in the coach's office. Teams with high shooting percentages tend to win more, but S% fluctuates heavily and lacks consistency. Its influence on coach firings may be disproportionate.</p>
-  <p>Organizations should take note: firing a coach over poor shooting numbers may be blaming the wrong factor. In a league where goals can hinge on inches and bounces, decision-makers must look deeper than surface stats to build long-term success.</p>
+  <p>This project confirms that shooting percentage is not a skill-driven stat at the team level, but it still matters both on the scoreboard and in the coach's office. Teams with high shooting percentages tend to win more. Yet, since S% fluctuates heavily and lacks stability, its role in coaching evaluations may be disproportionate.</p>
+  <p>Organizations should take note: firing a coach over poor winning numbers over a stretch of games may be blaming the wrong factor as cold team shooting is a heavy factor. This analysis aims to show the randomness of shooting percentage and the impact on winning that occurs. In a league where goals can hinge on inches and bounces, decision-makers must look deeper than surface stats to build long-term success.</p>
 </section>
 			</div>
 			<footer id="footer">
