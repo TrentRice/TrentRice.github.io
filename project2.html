@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Is Shooting Percentage Just Luck? An analysis of NHL Performance and Coach Firings - Trent Rice</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<div id="wrapper" class="fade-in">
+			<header id="header">
+				<a href="index.html" class="logo">Trent Rice</a>
+			</header>
+			<nav id="nav">
+				<ul class="links">
+					<li><a href="index.html">Projects</a></li>
+					<li class="active"><a href="project1.html">Shooting % Bad Luck</a></li>
+				</ul>
+				<ul class="icons">
+					<li><a href="https://www.linkedin.com/in/trent-rice-7a2b5428a/" target="_blank" class="icon brands alt fa-linkedin"><span class="label">linkedin</span></a></li>
+					<li><a href="https://github.com/TrentRice" target="_blank" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+				</ul>
+			</nav>
+			<div id="main">
+				<section class="post">
+					<header class="major">
+						<h1>Is Shooting Percentage Just Luck? An analysis of NHL Performance and Coach Firings</h1>
+					</header>
+					<span class="image fit"><img src="images/NHLCoachFiring.png" alt="NHLCoachFiring" /></span>
+					<p>
+					</p>
+<h2>Introduction</h2>
+	<p>
+	Recently, I read Moneyball by Michael Lewis—a story that brilliantly captures how data revolutionized baseball. Many of the chapters mentioned Bill James, a statistician who revolutionized baseball analytics since 1977. The book explained that the Moneyball philosophy is the idea that traditional statistics often overlook deeper truths in performance, and that undervalued indicators can reveal winning patterns. This is where Bill James came in to play in his creation of the Pythagorean Expectation.
+	</p>
+	<p>
+	The Pythagorean Expectation estimates a team’s expected winning percentage based not on wins or standings, but on their scoring efficiency. How many times they score compared to how many times they get scored on. Though originally created for baseball, this has been put into play in other sports, and I wanted to test it out for myself with real life scoring data. How would different sports styles affect the formulas effectiveness?
+	</p>
+	<p>
+	This led to the development of <strong>Pythagorean-Expectation-Sports-Predictions</strong>, a Python-based project exploring how well the formula predicts win percentages across five major leagues:
+	</p>
+	<ul>
+		<li>Major League Baseball (MLB)</li>
+		<li>National Basketball Association (NBA)</li>
+		<li>National Hockey League (NHL)</li>
+		<li>Indian Premier League (IPL – T20 Cricket)</li>
+		<li>English Soccer (Premier League, Championship, League One, League Two)</li>
+	</ul>
+
+	<h2>Background</h2>
+	<p>
+	The Pythagorean Expectation formula estimates a team's winning percentage as:
+	</p>
+	<p><code>Win% = (Score For)² / ((Score For)² + (Score Against)²)</code></p>
+	<ul>
+		<li><strong>Score For</strong> and <strong>Score Against</strong> are total season scores.</li>
+		<li>The model assumes scoring margin is a more stable performance indicator than raw win-loss records.</li>
+	</ul>
+
+	<h2>Methodology</h2>
+	<p>Each Jupyter Notebook in the project includes:</p>
+	<ul>
+		<li><strong>Data Retrieval:</strong> Historical data from publicly available Excel datasets.</li>
+		<li><strong>Feature Engineering:</strong> Calculated total points/runs/goals for and against.</li>
+		<li><strong>Model Implementation:</strong> Applied the Pythagorean formula for prediction.</li>
+		<li><strong>Analysis:</strong> Compared predicted vs. actual win % using regression.</li>
+		<li><strong>Visualization:</strong> Plotted scatter graphs to assess fit.</li>
+	</ul>
+	<p>Full code available on <a href="https://github.com/TrentRice/Pythagorean-Expectation-Sports-Predictions" target="_blank">GitHub</a>.</p>
+
+<h2>Results Overview</h2>
+
+<h3>Pythagorean Expectation</h3>
+
+<h4>NHL</h4>
+<ul>
+  <li><strong>Coefficient:</strong> 1.076</li>
+  <li>For every 0.1 unit increase in Pythagorean, winning percentage increases by 0.1076</li>
+  <li><strong>R-squared:</strong> 0.902</li>
+  <li>Pythagorean accounts for 90.2% of the variation in winning percentage.</li>
+  <li><strong>P-Value:</strong> 0.000</li>
+  <li>P-value &lt; 0.05 — result is statistically significant.</li>
+  <li><strong>Conclusion:</strong> NHL shows strong correlation with Pythagorean Expectation. Scoring differential leads to wins in a clear, predictable way.</li>
+</ul>
+<img src="images/NHLExpScatter.png" alt="NHL Scatter" style="display: block; margin: 0 auto;" width="500">
+
+
+<h4>MLB</h4>
+<ul>
+  <li><strong>Coefficient:</strong> 0.877</li>
+  <li>For every 0.1 unit increase in Pythagorean, winning percentage increases by 0.0887</li>
+  <li><strong>R-squared:</strong> 0.894</li>
+  <li>Pythagorean accounts for 89.4% of the variation in winning percentage.</li>
+  <li><strong>P-Value:</strong> 0.000</li>
+  <li>P-value &lt; 0.05 — result is statistically significant.</li>
+  <li><strong>Conclusion:</strong> Strong model fit. MLB results align closely with Pythagorean predictions.</li>
+</ul>
+<img src="images/MLBExpScatter.png" alt="MLB Scatter" style="display: block; margin: 0 auto;" width="500">
+
+<h4>IPL</h4>
+<ul>
+  <li><strong>Coefficient:</strong> 3.552</li>
+  <li>For every 0.1 unit increase in Pythagorean, winning percentage increases by 0.3552</li>
+  <li><strong>R-squared:</strong> 0.234</li>
+  <li>Pythagorean accounts for 23.4% of the variation in winning percentage.</li>
+  <li><strong>P-Value:</strong> 0.225</li>
+  <li>P-value &gt; 0.05 — not statistically significant.</li>
+  <li><strong>Conclusion:</strong> Pythagorean less effective in IPL. Format allows chasing team to win by only 1 run, limiting predictive power of run differentials.</li>
+</ul>
+<img src="images/IPLExpScatter.png" alt="IPL Scatter" style="display: block; margin: 0 auto;" width="500">
+
+<h4>NBA</h4>
+<ul>
+  <li><strong>Coefficient:</strong> 6.554</li>
+  <li>For every 0.1 unit increase in Pythagorean, winning percentage increases by 0.6554</li>
+  <li><strong>R-squared:</strong> 0.943</li>
+  <li>Pythagorean accounts for 94.3% of the variation in winning percentage.</li>
+  <li><strong>P-Value:</strong> 0.000</li>
+  <li>P-value &lt; 0.05 — result is statistically significant.</li>
+  <li><strong>Conclusion:</strong> Excellent fit. High-scoring nature of basketball makes Pythagorean particularly effective.</li>
+</ul>
+<img src="images/NBAExpScatter.png" alt="NBA Scatter" style="display: block; margin: 0 auto;" width="500">
+
+<h4>English Soccer (4 Leagues)</h4>
+<ul>
+  <li><strong>Coefficient:</strong> 0.6502</li>
+  <li>For every 0.1 unit increase in Pythagorean, winning percentage increases by 0.06502</li>
+  <li><strong>R-squared:</strong> 0.934</li>
+  <li>Pythagorean accounts for 93.4% of the variation in winning percentage.</li>
+  <li><strong>P-Value:</strong> 0.000</li>
+  <li>P-value &lt; 0.05 — result is statistically significant.</li>
+  <li><strong>Conclusion:</strong> Strong result even in low-scoring sport. Predictive strength holds in soccer formats.</li>
+</ul>
+<img src="images/ESExpScatter.png" alt="ES Scatter" style="display: block; margin: 0 auto;" width="500">
+
+<h3>Pythagorean Expectation for Predicting Winning Percentage</h3>
+
+<h4>MLB</h4>
+<ul>
+  <li><strong>Explanation:</strong> 
+    First-half data (pre All-Star break) was used to calculate Pythagorean Expectation. This was then used to predict second-half win percentage.
+  </li>
+  <li><strong>Correlation Coefficients:</strong>
+    <ul>
+      <li>Pythagorean → 2nd half win %: 0.69</li>
+      <li>1st half win % → 2nd half win %: 0.65</li>
+    </ul>
+  </li>
+  <li><strong>Conclusion:</strong> Pythagorean better predicted second-half performance than first-half win %.</li>
+</ul>
+<img src="images/MLBPred.png" alt="MLB Pred" style="display: block; margin: 0 auto;" width="500">
+
+<h4>English Soccer</h4>
+<ul>
+  <li><strong>Explanation:</strong> 
+    2017 season data (goals scored and conceded) was used to compute Pythagorean, which then predicted 2018 win percentages.
+  </li>
+  <li><strong>Correlation Coefficients:</strong>
+    <ul>
+      <li>2017 Pythagorean → 2018 win %: 0.616</li>
+      <li>2017 win % → 2018 win %: 0.602</li>
+    </ul>
+  </li>
+  <li><strong>Conclusion:</strong> Pythagorean slightly outperformed win percentage as a predictor across seasons.</li>
+</ul>
+<img src="images/ESPred.png" alt="ES Pred" style="display: block; margin: 0 auto;" width="500">
+
+<h2>Takeaways and Conclusions</h2>
+<p>
+In exploring the Pythagorean Expectation across five distinct sports, this project reinforces how a simple statistical model originally conceived for baseball can reveal deeper patterns of team performance across different scoring systems and formats. The model performed best in four out of five sports, with cricket being the outlier—likely due to its unique structure where only one team bats at a time and the second team only needs to surpass the opponent’s score.
+</p>
+<p>
+Compared to today’s machine learning algorithms, the Pythagorean Expectation is a simpler, lower-compute approach, yet it demonstrated strong performance. As sports continue to embrace data-driven decision-making, tools like the Pythagorean Expectation offer both accessibility and analytical depth—making them a crucial part of the modern sports analyst's toolkit.
+</p>
+</section>
+			</div>
+			<footer id="footer">
+				<ul class="icons alt">
+					<li><a href="https://www.linkedin.com/in/trent-rice-7a2b5428a/" target="_blank" class="icon brands alt fa-linkedin"><span class="label">linkedin</span></a></li>
+					<li><a href="https://github.com/TrentRice" target="_blank" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+				</ul>
+			</footer>
+			<div id="copyright">
+				<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+			</div>
+		</div>
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+	</body>
+</html>
