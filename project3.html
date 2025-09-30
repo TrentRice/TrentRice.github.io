@@ -34,38 +34,40 @@
           <p>This forms the basis of why I decided to create the player analysis dashboard detailed in this article. I wanted to build a dynamic, interactive tool that empowers users to explore the careers of any NHL player from 2007-08 to 2024-25. By visualizing advanced statistics, this dashboard moves beyond the box score to reveal the underlying components of a player's performance.</p>
           <p>This project set out to answer three key questions that users can explore for any player:</p>
           <ul>
-            <li>How has a player's overall value to their team, measured by <strong>Wins Above Replacement (WAR)</strong>, trended throughout their career?</li>
-            <li>Which specific skills—like <strong>Finishing</strong>, <strong>Playmaking</strong>, or <strong>Defence</strong>—have defined their peak years versus their later seasons?</li>
+            <li>How has a player's overall value to their team, measured by Wins Above Replacement (WAR), trended throughout their career?</li>
+            <li>Which specific skills—like Finishing, Playmaking, or Defence have defined their peak years versus their later seasons?</li>
             <li>How does one player's statistical profile in a given year compare to another's, providing a data-driven basis for evaluation?</li>
           </ul>
-          <p>By breaking down player performance into these granular components, we can gain a much deeper appreciation for their unique career arcs and true impact on the ice. 🏒</p>
+          <p>By breaking down player performance into these granular components, we can gain a much deeper appreciation for their unique career arcs and true impact on the ice. </p>
 
           <h3>Background</h3>
           <p>To create a fair and insightful comparison between players, this dashboard uses percentile-based stats. These metrics compare a player's performance against the entire league for a given season. A 90th percentile ranking means the player performed better than 90% of his peers in that specific area, providing crucial context.</p>
           <p>The key metrics used are:</p>
           <ul>
             <li><strong>Projected Wins Above Replacement (Proj. WAR %):</strong> This is an all-in-one metric that estimates a player's total contribution to his team in terms of wins compared to a readily available "replacement-level" player. It is the primary indicator of a player's overall value.</li>
+            <img src="images/NHLWAR.png" alt="NHL WAR" style="display: block; margin: 0 auto;" width="500">
             <li><strong>Offence & Defence:</strong> These categories are broken down further into Even-Strength (EV), Power Play (PP), and Shorthanded (SH) situations to isolate a player's contributions in different game states.</li>
-            <li><strong>Finishing:</strong> This measures a player's ability to score goals above or below statistical expectation based on the quality and location of their shots. An elite finisher consistently scores more goals than expected.</li>
-            <li><strong>Playmaking:</strong> This evaluates a player's ability to set up teammates for scoring chances.</li>
+            <li><strong>Production:</strong> This evaluates a player's point production per 60 minutes of game time to see how he is impacting the scoresheet.</li>
+            <li><strong>Finishing:</strong> This measures a player's ability to score goals based on goals scored per 60 minute baseline. Thus, giving a look at players who can put the puck in the back of the net no matter the situation.</li>
+            <li><strong>Playmaking:</strong> This evaluates a player's ability to set up his teammates through an assists per 60 minutes statistic. This gives a visual of the best and worse all purpose playmakers in the league.</li>
           </ul>
 
           <h3>Methodology</h3>
           <p>The creation of this dashboard involved a three-step process to transform raw data into an interactive analytical tool.</p>
           <ol>
-            <li><strong>Data Consolidation and Processing:</strong> Player performance data spanning from 2007 to 2025, originally stored in Excel files, was centralized. I used <strong>SQL</strong> to query, clean, and structure this data, calculating percentile rankings for each metric across every season. This created a robust and organized dataset ready for visualization.</li>
-            <li><strong>Dashboard Development:</strong> <strong>Microsoft Power BI</strong> was used to build the dashboard. The core of the design was interactivity; the dashboard had to be flexible enough to analyze hundreds of different players over more than a decade of seasons.</li>
-            <li><strong>Visualization Design:</strong> The dashboard features several key components including interactive slicers for <strong>Player</strong> and <strong>Season</strong>, summary cards for a performance snapshot, and trend graphs to visualize a player's entire career arc.</li>
+            <li><strong>Data Consolidation and Processing:</strong> Player performance data spanning from 2007 to 2025, originally stored in Excel files, was centralized. I used SQL to query, clean, and structure this data, calculating percentile rankings for each metric across every season. This created a robust and organized dataset ready for visualization.</li>
+            <li><strong>Dashboard Development:</strong> Microsoft Power BI was used to build the dashboard. The core of the design was interactivity; the dashboard had to be flexible enough to analyze hundreds of different players over more than a decade of seasons.</li>
+            <li><strong>Visualization Design:</strong> The dashboard features several key components including interactive slicers for Player and Season, summary cards for a performance snapshot showing greener for better and red for worse. Plus, trend graphs to visualize a player's entire career arc.</li>
           </ol>
 
           <h3>Case Study: Analyzing Alex Ovechkin</h3>
-          <p>To demonstrate the dashboard's capabilities, let's examine the career of Alex Ovechkin, the player selected in the screenshot.</p>
+          <p>To demonstrate the dashboard's capabilities, let's examine the career of Alex Ovechkin, the player selected in the screenshot below.</p>
           
           <h4>1. Visualizing an Elite Peak and a Gradual Decline</h4>
-          <p>The <strong>Projected WAR Percentile</strong> graph instantly tells the story of Ovechkin's career-long impact. For over a decade, he was one of the most valuable players in the league, consistently ranking near the top. The chart also clearly visualizes the inevitable effects of age, showing a significant downward trend in his overall value from the 2021-22 season onward. This same analysis can be applied to any player to see the length and height of their prime.</p>
+          <p>The Projected WAR Percentile graph instantly tells the story of Ovechkin's career-long impact. For over a decade, he was one of the most valuable players in the league, consistently ranking near the top. The chart also clearly visualizes the inevitable effects of age, showing a significant downward trend in his overall value from the 2020-21 season onward. This same analysis can be applied to any player to see the length and height of their prime.</p>
 
           <h4>2. Identifying a Generational Skill</h4>
-          <p>The lower graph highlights what makes Ovechkin unique. His <strong>Finishing</strong> percentile (orange line) has been exceptionally high for nearly his entire career. In the 2012-13 season shown, he was in the <strong>100th percentile</strong>—the best in the league. This dashboard allows users to identify the single, defining skill that makes a player special, whether it's Ovechkin's finishing, Sidney Crosby's playmaking, or Patrice Bergeron's defence.</p>
+          <p>The lower graph highlights what makes Ovechkin unique. His Finishing percentile (light blue line) has been exceptionally high for nearly his entire career. In the 2012-13 season shown, he was in the 100th percentile, the best in the league. This dashboard allows users to identify the single, defining skill that makes a player special, whether it's Ovechkin's finishing, Sidney Crosby's playmaking, or Patrice Bergeron's defence.</p>
 
           <h4>3. Tracking a Player's Evolution</h4>
           <p>The dashboard shows how a player's game can change. While Ovechkin's offence has always been his calling card, users can see how his defensive ratings have fluctuated or how his value has become more reliant on the power play in later years. This tool can be used to track a young player's development or pinpoint the season an aging veteran adapted their style to remain effective.</p>
