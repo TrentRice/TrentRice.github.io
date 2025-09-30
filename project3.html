@@ -27,7 +27,7 @@
           <header class="major">
             <h1>Diving deep into NHL Analytics. A Visual Analysis of Player Performance</h1>
           </header>
-          <span class="image fit"><img src="images/NHLOviDashboard.png" alt="Power BI NHL Player Dashboard" /></span>
+          <span class="image fit"><img src="images/NHLMcDaDashboard.png" alt="Power BI NHL Player Dashboard" /></span>
           
           <h3>Introduction</h3>
           <p>In modern hockey analysis, comparing players across different seasons, positions, and eras is a complex challenge. Is a 30-goal scorer from 2010 more valuable than a 25-goal scorer today? How do we measure the decline of a star player or the rise of a defensive specialist beyond simple points and plus-minus? The answers often lie hidden in deeper, more advanced metrics.</p>
@@ -47,8 +47,11 @@
             <li><strong>Projected Wins Above Replacement (Proj. WAR %):</strong> This is an all-in-one metric that estimates a player's total contribution to his team in terms of wins compared to a readily available "replacement-level" player. It is the primary indicator of a player's overall value.</li>
             <img src="images/NHLWAR.png" alt="NHL WAR" style="display: block; margin: 0 auto;" width="500">
             <li><strong>Offence & Defence:</strong> These categories are broken down further into Even-Strength (EV), Power Play (PP), and Shorthanded (SH) situations to isolate a player's contributions in different game states.</li>
+            <img src="images/NHLOffence.png" alt="NHL Offence" style="display: block; margin: 0 auto;" width="500">
             <li><strong>Production:</strong> This evaluates a player's point production per 60 minutes of game time to see how he is impacting the scoresheet.</li>
+            <img src="images/NHLProd.png" alt="NHL Prod" style="display: block; margin: 0 auto;" width="500">
             <li><strong>Finishing:</strong> This measures a player's ability to score goals based on goals scored per 60 minute baseline. Thus, giving a look at players who can put the puck in the back of the net no matter the situation.</li>
+            <img src="images/NHLG.png" alt="NHL Finish" style="display: block; margin: 0 auto;" width="500">
             <li><strong>Playmaking:</strong> This evaluates a player's ability to set up his teammates through an assists per 60 minutes statistic. This gives a visual of the best and worse all purpose playmakers in the league.</li>
           </ul>
 
@@ -56,13 +59,15 @@
           <p>The creation of this dashboard involved a three-step process to transform raw data into an interactive analytical tool.</p>
           <ol>
             <li><strong>Data Consolidation and Processing:</strong> Player performance data spanning from 2007 to 2025, originally stored in Excel files, was centralized. I used SQL to query, clean, and structure this data, calculating percentile rankings for each metric across every season. This created a robust and organized dataset ready for visualization.</li>
+            <img src="images/NHLClean.png" alt="NHL Clean" style="display: block; margin: 0 auto;" width="500">
             <li><strong>Dashboard Development:</strong> Microsoft Power BI was used to build the dashboard. The core of the design was interactivity; the dashboard had to be flexible enough to analyze hundreds of different players over more than a decade of seasons.</li>
             <li><strong>Visualization Design:</strong> The dashboard features several key components including interactive slicers for Player and Season, summary cards for a performance snapshot showing greener for better and red for worse. Plus, trend graphs to visualize a player's entire career arc.</li>
           </ol>
 
           <h3>Case Study: Analyzing Alex Ovechkin</h3>
           <p>To demonstrate the dashboard's capabilities, let's examine the career of Alex Ovechkin, the player selected in the screenshot below.</p>
-          
+          <img src="images/NHLOviDashboard.png" alt="NHL Ovi" style="display: block; margin: 0 auto;" width="500">
+
           <h4>1. Visualizing an Elite Peak and a Gradual Decline</h4>
           <p>The Projected WAR Percentile graph instantly tells the story of Ovechkin's career-long impact. For over a decade, he was one of the most valuable players in the league, consistently ranking near the top. The chart also clearly visualizes the inevitable effects of age, showing a significant downward trend in his overall value from the 2020-21 season onward. This same analysis can be applied to any player to see the length and height of their prime.</p>
 
