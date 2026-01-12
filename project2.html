@@ -31,8 +31,8 @@
 					<p>
 					</p>
 <h3>Introduction</h3>
-  <p>Last season, 25% of coaches in the NHL were fired either during or after the year. This reflects a trend in the NHL as front offices do not have patience to give a coach a long leash, leading to quick decisions. Teams go on cold runs, the blame is put on the coach, and they get fired—simple as that.</p>
-  <p>This forms the basis of why I decided to conduct the analysis detailed in this article: I wanted to know whether these constant firings were warranted or if bad luck was in play. In hockey analytics, few stats spark as much debate as shooting percentage. Some argue it’s mostly driven by luck—subject to random bounces, hot streaks, and goalie performance—while others believe it reflects real skill, especially when maintained over time. Regardless, shooting percentage (S%) plays a role in how teams are evaluated and, potentially, how head coaches are judged.</p>
+  <p>Last season, 25% of coaches in the NHL were fired either during or after the year. This reflects a trend in the NHL as front offices do not have patience to give a coach a long leash, leading to quick decisions. Teams go on cold runs, the blame is put on the coach, and they get fired, simple as that.</p>
+  <p>This forms the basis of why I decided to conduct the analysis detailed in this article: I wanted to know whether these constant firings were warranted or if bad luck was in play. In hockey analytics, few stats spark as much debate as shooting percentage. Some argue it’s mostly driven by luck, subject to random bounces, hot streaks, and goalie performance while others believe it reflects real skill, especially when maintained over time. Regardless, shooting percentage (S%) plays a role in how teams are evaluated and, potentially, how head coaches are judged.</p>
 
   <p>This project set out to answer three key questions using NHL data and R-based statistical analysis:</p>
   <ul>
@@ -40,12 +40,12 @@
     <li>Does a high shooting percentage relate to a higher win rate?</li>
     <li>Are coaches more likely to be fired with below-average shooting percentages?</li>
   </ul>
-  <p>By breaking down team-level performance and linking it to coaching outcomes, we can better understand how performance metrics—whether fair or flawed—shape careers in the NHL.</p>
+  <p>By breaking down team-level performance and linking it to coaching outcomes, we can better understand how performance metrics, whether fair or flawed, shape careers in the NHL.</p>
 
   <h3>Background</h3>
   <p>Shooting percentage is calculated as goals scored divided by shots taken. On the surface, it seems simple. But it has outsized consequences: teams with low S% often lose more games, and in some cases, coaches with low-S% seasons don’t return the following year.</p>
   <p>While possession-based metrics like Corsi and Fenwick have grown in popularity, shooting percentage still shows up in headlines, recaps, and executive decisions. But is it reliable? Is it fair?</p>
-  <p>This project explores whether shooting percentage is more noise than signal—and whether it unfairly affects job security.</p>
+  <p>This project explores whether shooting percentage is more noise than signal and whether it unfairly affects job security.</p>
 
   <h3>Methodology</h3>
   <ol>
@@ -79,7 +79,7 @@
   <img src="images/SPvsWPNHL.png" alt="SPvsWPNHL" style="display: block; margin: 0 auto;" width="500">
 
   <h4>3. Unlucky Coaches Are Fired More Often</h4>
-  <p>This was one of the most striking results. Coaches with lower-than-average S% had significantly higher firing rates—even when win percentage was controlled.</p>
+  <p>This was one of the most striking results. Coaches with lower-than-average S% had significantly higher firing rates even when win percentage was controlled.</p>
   <ul>
     <li>Firing rate among "unlucky" coaches: <strong>37.4%</strong></li>
     <li>Firing rate among "lucky" coaches: <strong>27.3%</strong></li>
