@@ -29,111 +29,63 @@
           </header>
           <span class="image fit"><img src="images/PredictingWhiffsMain.png" alt="Predicting Whiffs" /></span>
           
- <h3>Introduction</h3>
-<p>In modern baseball analysis, understanding why certain pitches generate swings and misses is one of the most valuable competitive advantages in the game. Why does one fastball consistently overpower hitters while another, thrown at similar velocity, gets fouled off? What separates an elite swing-and-miss slider from an average one? The answer lies in pitch-level data and advanced machine learning techniques.</p>
+<h3>Introduction</h3>
+<p>In the modern era of Major League Baseball, the "Three True Outcomes"—strikeouts, walks, and home runs—have come to dominate the strategic landscape. Among these, the ability to generate a swing-and-miss, or a "whiff," is perhaps the most coveted skill for a pitcher. Unlike a ball put into play, which is subject to the whims of defensive positioning and stadium dimensions, a whiff represents a total victory for the pitcher. It eliminates variables, reduces the volatility of sequencing luck, and serves as one of the most stable predictors of long-term run prevention.</p>
 
-<p>This project was built to predict whiffs (swinging strikes) using pitch-by-pitch MLB data. Rather than evaluating pitchers at a season level, this model works at the individual pitch level, identifying the specific characteristics that increase the probability of generating a swing and miss.</p>
+<p>As the game has shifted toward a data-driven philosophy, the tools used to evaluate this skill have evolved. With the advent of Statcast, every individual pitch is tracked with millimeter precision. This project leverages that granularity to build a machine learning model capable of estimating the probability of a whiff on a pitch-by-pitch basis. Rather than asking "How many strikeouts did this pitcher get?", we ask: "Based on the physical profile of this specific delivery, what was the likelihood the batter would miss?"</p>
 
-<p>The goal of this project was to answer three key analytical questions:</p>
+<h3>Defining the Classification Problem</h3>
+<p>The objective of this project is a binary classification: predicting whether a pitch results in a <strong>Whiff (1)</strong> or <strong>No Whiff (0)</strong>. A whiff is defined using Statcast’s specific event markers, specifically <code>swinging_strike</code> and <code>swinging_strike_blocked</code>.</p>
+<img src="images/UniqueOutcomeCount.png" alt="MLB Unique" style="display: block; margin: 0 auto;" width="500">
+<p>One of the primary hurdles in this analysis is the inherent class imbalance of the dataset. As seen in the distribution of outcomes from the 2025 MLB season, whiffs represent a small minority of total pitches—typically between 10% and 15%. The vast majority of pitches result in called strikes, balls, fouls, or balls in play. In a machine learning context, this imbalance is dangerous; a naive model could achieve 85% accuracy simply by predicting "No Whiff" every time. To combat this, the modeling process required specific architectural choices, including class weighting and post-hoc calibration.</p>
+
+<h3>Data Acquisition and Feature Engineering</h3>
+<p>The data for this study was sourced from the 2025 MLB regular season using the <code>pybaseball</code> interface to Statcast. The resulting dataset contains hundreds of thousands of individual pitches, each acting as a unique observation. To provide the models with a comprehensive "view" of the pitch, I engineered features across three primary domains:</p>
 <ul>
-  <li>Which pitch characteristics most strongly influence whiff probability?</li>
-  <li>Can we accurately predict the likelihood of a swing and miss before the pitch is thrown?</li>
-  <li>How can this model provide actionable insights for player development and pitch design?</li>
+<li><strong>Physical Properties:</strong> This includes <code>release_speed</code> (velocity), <code>release_spin_rate</code>, and <code>release_extension</code>. These variables define the raw "stuff" of a pitcher.</li>
+<li><strong>Movement Profiles:</strong> I utilized <code>pfx_x</code> (horizontal movement) and <code>pfx_z</code> (vertical movement) to capture how much a pitch deviates from a straight line.</li>
+<li><strong>Context and Location:</strong> Whiff probability is highly contextual. I included <code>plate_x</code> and <code>plate_z</code> coordinates to map the pitch’s position in the zone, along with the count (balls and strikes).</li>
 </ul>
 
-<p>By combining pitch tracking data with machine learning classification techniques, this project moves beyond traditional strikeout metrics and into predictive pitch analytics.</p>
+<p>Because features like velocity and spin rate exist on vastly different numerical scales, I applied <code>StandardScaler</code> to all continuous inputs. This ensures the neural network treats each feature with appropriate weight, preventing high-magnitude variables from drowning out subtle movement data.</p>
 
-
-<h3>Background</h3>
-<p>Major League Baseball now provides detailed pitch-level tracking data through Statcast. Each pitch includes information such as velocity, spin rate, movement, release point, pitch type, count, and more. This granular dataset allows us to model outcomes like whiffs at an extremely detailed level.</p>
-
-<p>For this project, a whiff was defined as a swing and miss on a pitch. The model attempts to classify each pitch as either:</p>
-<ul>
-  <li><strong>1 = Whiff</strong></li>
-  <li><strong>0 = Not a Whiff</strong></li>
-</ul>
-
-<p>The key features used in the model included:</p>
-<ul>
-  <li><strong>Velocity:</strong> The speed of the pitch in miles per hour.</li>
-  <li><strong>Spin Rate:</strong> Revolutions per minute, influencing pitch movement and deception.</li>
-  <li><strong>Horizontal & Vertical Break:</strong> How the pitch moves relative to gravity.</li>
-  <li><strong>Release Position:</strong> The point where the pitcher releases the ball.</li>
-  <li><strong>Pitch Type:</strong> Fastball, slider, curveball, changeup, etc.</li>
-  <li><strong>Count Context:</strong> Balls and strikes at the time of the pitch.</li>
-</ul>
-
-<p>Unlike strikeouts, which depend on multiple pitches, whiffs isolate the effectiveness of a single pitch. This makes them ideal for modeling pitch-level dominance.</p>
-
-
-<h3>Methodology</h3>
-<p>The development of this predictive model followed a structured data science workflow:</p>
-
+<h3>Modeling Approach: LogReg vs. MLP</h3>
+<p>To explore the complexity of pitch outcomes, I implemented and compared two distinct modeling architectures:</p>
 <ol>
-  <li><strong>Data Cleaning & Preparation:</strong> Raw pitch-level data was processed using Python. Missing values were handled, categorical variables such as pitch type were encoded, and numerical features were standardized where necessary. The target variable was engineered as a binary whiff indicator.</li>
-
-  <li><strong>Feature Engineering:</strong> Additional contextual features were derived to improve predictive performance. This included count leverage, pitch movement differentials, and interaction effects between velocity and spin rate.</li>
-
-  <li><strong>Model Selection:</strong> Several classification algorithms were tested, including Logistic Regression and tree-based models. The final model was selected based on predictive accuracy, ROC-AUC score, and interpretability.</li>
-
-  <li><strong>Model Evaluation:</strong> The dataset was split into training and testing sets. Performance was evaluated using:
-    <ul>
-      <li>Accuracy</li>
-      <li>Precision and Recall</li>
-      <li>F1 Score</li>
-      <li>ROC-AUC</li>
-    </ul>
-  </li>
+<li><strong>Logistic Regression (The Baseline):</strong> I began with a Logistic Regression model to establish a performance floor. This linear approach is highly interpretable and serves as a vital benchmark for more complex methods.</li>
+<li><strong>Multi-Layer Perceptron (The Neural Network):</strong> The second model is a feedforward neural network (MLP) built using PyTorch. The architecture consists of an input layer, a hidden layer with ReLU activation, and an output layer producing a single logit. The MLP is designed to capture the non-linear "interdependencies" of pitching—such as how a high spin rate might be highly effective at the top of the strike zone but detrimental at the bottom.</li>
 </ol>
 
-<p>The final model demonstrated strong predictive capability, successfully distinguishing high-probability whiff pitches from contact-prone pitches.</p>
+<p>To address the class imbalance, I utilized <code>BCEWithLogitsLoss</code> with a <code>pos_weight</code> parameter. This penalized the model more heavily for missing a whiff than for misidentifying a non-whiff, forcing the network to learn the characteristics of the minority class.</p>
 
+<h3>Performance Analysis: Discriminatory Power</h3>
+<p>The performance of these models was evaluated using ROC-AUC (Area Under the Receiver Operating Characteristic Curve). In the context of baseball pitching data, an AUC of 0.70 to 0.75 is considered a strong signal, given the inherent "noise" of hitter tendencies and approach.</p>
 
-<h3>Key Findings</h3>
+<p>My results showed that the MLP offered a tangible improvement over the Logistic Regression baseline. The MLP achieved an <strong>AUC of 0.714</strong>, while the LogReg trailed slightly at <strong>0.701</strong>. This indicates that the neural network was better able to distinguish between pitches that generated whiffs and those that did not. However, the relatively close scores suggest that the primary drivers of whiffs (velocity, location, and count) can be captured reasonably well even by linear methods.</p>
 
-<h4>1. Velocity Alone Is Not Enough</h4>
-<p>While higher velocity increases whiff probability, it is not the sole driver. Spin rate and pitch movement significantly enhance the effectiveness of high-velocity pitches. A well-located 95 mph fastball with elite spin can outperform a 99 mph pitch with below-average movement.</p>
+<h3>The Necessity of Post-hoc Calibration</h3>
+<p>While the models were successful at ranking pitches by whiff probability, their raw outputs were not initially "honest" probabilities. Due to the class weighting used during training, the models were often over-confident, pushing predicted probabilities into ranges that did not match reality. This led to the most critical phase of the project: <strong>Post-hoc Calibration via Platt Scaling</strong>.</p>
 
-<h4>2. Breaking Balls Drive Whiff Rates</h4>
-<p>Sliders and curveballs showed substantially higher predicted whiff probabilities compared to fastballs. The combination of vertical drop and horizontal sweep plays a major role in deceiving hitters.</p>
-
-<h4>3. Count Leverage Matters</h4>
-<p>Two-strike counts significantly increase whiff probability. This highlights the strategic component of pitching — pitch effectiveness is partially contextual and not purely mechanical.</p>
-
-<h4>4. Movement Profiles Are Critical</h4>
-<p>Pitches with greater deviation from expected movement (relative to velocity bands) consistently produced higher whiff probabilities. This suggests that deception and unexpected movement patterns are key contributors to swing-and-miss outcomes.</p>
-
-
-<h3>Applications</h3>
-<p>This model has practical applications across multiple areas of baseball operations:</p>
+<p>Calibration ensures that if a model predicts a 20% chance of a whiff, the event actually happens 20% of the time in the long run. I evaluated the results using Log Loss and Brier Score, and the improvement was dramatic:</p>
 <ul>
-  <li><strong>Player Development:</strong> Identify which pitch characteristics to enhance during training.</li>
-  <li><strong>Pitch Design:</strong> Optimize velocity-spin-movement combinations for maximum swing-and-miss potential.</li>
-  <li><strong>Scouting & Evaluation:</strong> Quantify pitch-level dominance beyond ERA and strikeout rate.</li>
-  <li><strong>Game Strategy:</strong> Deploy high-probability whiff pitches in critical counts.</li>
+<li>The <strong>MLP Raw</strong> model had a Log Loss of <strong>1.135</strong>, indicating poor probabilistic alignment.</li>
+<li>After Platt Scaling, the <strong>MLP Calibrated</strong> model’s Log Loss dropped to <strong>0.372</strong>.</li>
 </ul>
 
-<p>Rather than relying solely on historical strikeout totals, teams can now evaluate the underlying probability of generating swings and misses on every pitch.</p>
-
-
-<h3>Visualization & Code Access</h3>
-<p>The full machine learning pipeline, including data cleaning, feature engineering, model training, and evaluation, is available in the GitHub repository.</p>
-
+<h3>Practical Applications in Player Evaluation</h3>
+<p>The ability to generate a well-calibrated "Expected Whiff" (xWhiff) metric has three immediate applications in a Major League front office:</p>
 <ul>
-  <p>Full project available on 
-    <a href="https://github.com/TrentRice/MLB-PitchbyPitch-Prediction" target="_blank">
-      GitHub
-    </a>.
-  </p>
+<li><strong>Luck Regression:</strong> If a pitcher has a 12% actual whiff rate but an xWhiff of 18%, they are likely "unlucky" and prime for a breakout.</li>
+<li><strong>Pitch Design:</strong> By holding all other variables constant and tweaking a single feature—like adding an inch of vertical break—we can use the model to see exactly how much that physical change improves the probability of a miss.</li>
+<li><strong>Arsenal Optimization:</strong> The model can identify "dead zones" in a pitcher's repertoire where their specific pitch profile is mathematically unlikely to generate a swing-and-miss.</li>
 </ul>
-
 
 <h3>Conclusion</h3>
-<p>This project demonstrates how pitch-level data combined with machine learning can uncover the mechanics behind swing-and-miss dominance. By shifting focus from aggregate outcomes like strikeouts to predictive probabilities at the individual pitch level, we gain a clearer understanding of what truly makes a pitch elite.</p>
-
-<p>In an era where competitive edges are measured in fractions of a win, the ability to quantify whiff probability provides actionable insights for pitchers, analysts, and front offices alike. This model highlights the power of combining sports analytics with modern data science to transform raw tracking data into strategic intelligence.</p>
-
-        </section>
+<p>This project demonstrates that while individual pitch outcomes are subject to significant variance, the underlying probability of a whiff can be modeled with high reliability. By comparing a linear baseline to a neural network, we found that a Multi-Layer Perceptron offers superior discriminatory power. However, the most vital takeaway is that raw machine learning outputs are often insufficient; post-hoc calibration is the bridge that turns raw model scores into meaningful, actionable baseball intelligence. As Statcast data continues to grow in complexity, these calibrated models will remain the cornerstone of elite player evaluation and development.</p>
+<ul>
+            <p>Full project available on <a href="https://github.com/TrentRice/MLB-PitchbyPitch-Prediction.git" target="_blank">GitHub</a>.</p>
+          </ul>        
+</section>
       </div>
       <footer id="footer">
         <ul class="icons alt">
