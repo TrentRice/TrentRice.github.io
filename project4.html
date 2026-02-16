@@ -108,7 +108,7 @@
     whiff signal can be captured by linear relationships, incorporating nonlinear structure 
     yields incremental gains in both discrimination and probability calibration.
   </p>
-<img src="images/LogRegVsMLP.png" alt="MLB LogReg vs MLP" style="display: block; margin: 0 auto;" width="500">
+<img src="images/LogRegVsMLP.png" alt="MLB LogReg vs MLP" style="display: block; margin: 0 auto;" width="1000">
 <h3>The Necessity of Post-hoc Calibration</h3>
 <p>While the models were successful at ranking pitches by whiff probability, their raw outputs were not initially "honest" probabilities. Due to the class weighting used during training, the models were often over-confident, pushing predicted probabilities into ranges that did not match reality. This led to the most critical phase of the project: <strong>Post-hoc Calibration via Platt Scaling</strong>.</p>
 
@@ -117,7 +117,9 @@
 <li>The <strong>MLP Raw</strong> model had a Log Loss of <strong>0.58</strong>, indicating poor probabilistic alignment.</li>
 <li>After Platt Scaling, the <strong>MLP Calibrated</strong> model’s Log Loss dropped to <strong>0.39</strong>.</li>
 </ul>
+<p>
 <img src="images/RawVsPosthoc.png" alt="MLB Raw vs Post-hoc" style="display: block; margin: 0 auto;" width="500">
+</p>
 <img src="images/RawVsPosthcStats.png" alt="MLB Raw vs Post-hoc Stats" style="display: block; margin: 0 auto;" width="500">
 <h3>Practical Applications in Player Evaluation</h3>
 <p>The ability to generate a well-calibrated "Expected Whiff" (xWhiff) metric has three immediate applications in a Major League front office:</p>
