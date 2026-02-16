@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Predicting Whiffs: A Statcast Machine Learning Approach - Trent Rice</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+  </head>
+  <body class="is-preload">
+    <div id="wrapper" class="fade-in">
+      <header id="header">
+        <a href="index.html" class="logo">Trent Rice</a>
+      </header>
+      <nav id="nav">
+        <ul class="links">
+          <li><a href="index.html">Projects</a></li>
+          <li class="active"><a href="project4.html">Predicting Whiffs</a></li>
+        </ul>
+        <ul class="icons">
+          <li><a href="https://www.linkedin.com/in/trent-rice-7a2b5428a/" target="_blank" class="icon brands alt fa-linkedin"><span class="label">linkedin</span></a></li>
+          <li><a href="https://github.com/TrentRice" target="_blank" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+        </ul>
+      </nav>
+      <div id="main">
+        <section class="post">
+          <header class="major">
+            <h1>Predicting Whiffs: A Statcast Machine Learning Approach</h1>
+          </header>
+          <span class="image fit"><img src="images/PredictingWhiffsMain.png" alt="Predicting Whiffs" /></span>
+          
+ <h3>Introduction</h3>
+<p>In modern baseball analysis, understanding why certain pitches generate swings and misses is one of the most valuable competitive advantages in the game. Why does one fastball consistently overpower hitters while another, thrown at similar velocity, gets fouled off? What separates an elite swing-and-miss slider from an average one? The answer lies in pitch-level data and advanced machine learning techniques.</p>
+
+<p>This project was built to predict whiffs (swinging strikes) using pitch-by-pitch MLB data. Rather than evaluating pitchers at a season level, this model works at the individual pitch level, identifying the specific characteristics that increase the probability of generating a swing and miss.</p>
+
+<p>The goal of this project was to answer three key analytical questions:</p>
+<ul>
+  <li>Which pitch characteristics most strongly influence whiff probability?</li>
+  <li>Can we accurately predict the likelihood of a swing and miss before the pitch is thrown?</li>
+  <li>How can this model provide actionable insights for player development and pitch design?</li>
+</ul>
+
+<p>By combining pitch tracking data with machine learning classification techniques, this project moves beyond traditional strikeout metrics and into predictive pitch analytics.</p>
+
+
+<h3>Background</h3>
+<p>Major League Baseball now provides detailed pitch-level tracking data through Statcast. Each pitch includes information such as velocity, spin rate, movement, release point, pitch type, count, and more. This granular dataset allows us to model outcomes like whiffs at an extremely detailed level.</p>
+
+<p>For this project, a whiff was defined as a swing and miss on a pitch. The model attempts to classify each pitch as either:</p>
+<ul>
+  <li><strong>1 = Whiff</strong></li>
+  <li><strong>0 = Not a Whiff</strong></li>
+</ul>
+
+<p>The key features used in the model included:</p>
+<ul>
+  <li><strong>Velocity:</strong> The speed of the pitch in miles per hour.</li>
+  <li><strong>Spin Rate:</strong> Revolutions per minute, influencing pitch movement and deception.</li>
+  <li><strong>Horizontal & Vertical Break:</strong> How the pitch moves relative to gravity.</li>
+  <li><strong>Release Position:</strong> The point where the pitcher releases the ball.</li>
+  <li><strong>Pitch Type:</strong> Fastball, slider, curveball, changeup, etc.</li>
+  <li><strong>Count Context:</strong> Balls and strikes at the time of the pitch.</li>
+</ul>
+
+<p>Unlike strikeouts, which depend on multiple pitches, whiffs isolate the effectiveness of a single pitch. This makes them ideal for modeling pitch-level dominance.</p>
+
+
+<h3>Methodology</h3>
+<p>The development of this predictive model followed a structured data science workflow:</p>
+
+<ol>
+  <li><strong>Data Cleaning & Preparation:</strong> Raw pitch-level data was processed using Python. Missing values were handled, categorical variables such as pitch type were encoded, and numerical features were standardized where necessary. The target variable was engineered as a binary whiff indicator.</li>
+
+  <li><strong>Feature Engineering:</strong> Additional contextual features were derived to improve predictive performance. This included count leverage, pitch movement differentials, and interaction effects between velocity and spin rate.</li>
+
+  <li><strong>Model Selection:</strong> Several classification algorithms were tested, including Logistic Regression and tree-based models. The final model was selected based on predictive accuracy, ROC-AUC score, and interpretability.</li>
+
+  <li><strong>Model Evaluation:</strong> The dataset was split into training and testing sets. Performance was evaluated using:
+    <ul>
+      <li>Accuracy</li>
+      <li>Precision and Recall</li>
+      <li>F1 Score</li>
+      <li>ROC-AUC</li>
+    </ul>
+  </li>
+</ol>
+
+<p>The final model demonstrated strong predictive capability, successfully distinguishing high-probability whiff pitches from contact-prone pitches.</p>
+
+
+<h3>Key Findings</h3>
+
+<h4>1. Velocity Alone Is Not Enough</h4>
+<p>While higher velocity increases whiff probability, it is not the sole driver. Spin rate and pitch movement significantly enhance the effectiveness of high-velocity pitches. A well-located 95 mph fastball with elite spin can outperform a 99 mph pitch with below-average movement.</p>
+
+<h4>2. Breaking Balls Drive Whiff Rates</h4>
+<p>Sliders and curveballs showed substantially higher predicted whiff probabilities compared to fastballs. The combination of vertical drop and horizontal sweep plays a major role in deceiving hitters.</p>
+
+<h4>3. Count Leverage Matters</h4>
+<p>Two-strike counts significantly increase whiff probability. This highlights the strategic component of pitching — pitch effectiveness is partially contextual and not purely mechanical.</p>
+
+<h4>4. Movement Profiles Are Critical</h4>
+<p>Pitches with greater deviation from expected movement (relative to velocity bands) consistently produced higher whiff probabilities. This suggests that deception and unexpected movement patterns are key contributors to swing-and-miss outcomes.</p>
+
+
+<h3>Applications</h3>
+<p>This model has practical applications across multiple areas of baseball operations:</p>
+<ul>
+  <li><strong>Player Development:</strong> Identify which pitch characteristics to enhance during training.</li>
+  <li><strong>Pitch Design:</strong> Optimize velocity-spin-movement combinations for maximum swing-and-miss potential.</li>
+  <li><strong>Scouting & Evaluation:</strong> Quantify pitch-level dominance beyond ERA and strikeout rate.</li>
+  <li><strong>Game Strategy:</strong> Deploy high-probability whiff pitches in critical counts.</li>
+</ul>
+
+<p>Rather than relying solely on historical strikeout totals, teams can now evaluate the underlying probability of generating swings and misses on every pitch.</p>
+
+
+<h3>Visualization & Code Access</h3>
+<p>The full machine learning pipeline, including data cleaning, feature engineering, model training, and evaluation, is available in the GitHub repository.</p>
+
+<ul>
+  <p>Full project available on 
+    <a href="https://github.com/TrentRice/MLB-PitchbyPitch-Prediction" target="_blank">
+      GitHub
+    </a>.
+  </p>
+</ul>
+
+
+<h3>Conclusion</h3>
+<p>This project demonstrates how pitch-level data combined with machine learning can uncover the mechanics behind swing-and-miss dominance. By shifting focus from aggregate outcomes like strikeouts to predictive probabilities at the individual pitch level, we gain a clearer understanding of what truly makes a pitch elite.</p>
+
+<p>In an era where competitive edges are measured in fractions of a win, the ability to quantify whiff probability provides actionable insights for pitchers, analysts, and front offices alike. This model highlights the power of combining sports analytics with modern data science to transform raw tracking data into strategic intelligence.</p>
+
+        </section>
+      </div>
+      <footer id="footer">
+        <ul class="icons alt">
+          <li><a href="https://www.linkedin.com/in/trent-rice-7a2b5428a/" target="_blank" class="icon brands alt fa-linkedin"><span class="label">linkedin</span></a></li>
+          <li><a href="https://github.com/TrentRice" target="_blank" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+        </ul>
+      </footer>
+      <div id="copyright">
+        <ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+      </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
