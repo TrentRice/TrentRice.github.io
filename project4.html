@@ -1,34 +1,37 @@
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <title>Predicting Whiffs: A Statcast Machine Learning Approach - Trent Rice</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-  </head>
-  <body class="is-preload">
-    <div id="wrapper" class="fade-in">
-      <header id="header">
-        <a href="index.html" class="logo">Trent Rice</a>
-      </header>
-      <nav id="nav">
-        <ul class="links">
-          <li><a href="index.html">Projects</a></li>
-          <li class="active"><a href="project4.html">Predicting Whiffs</a></li>
-        </ul>
-        <ul class="icons">
-          <li><a href="https://www.linkedin.com/in/trent-rice-7a2b5428a/" target="_blank" class="icon brands alt fa-linkedin"><span class="label">linkedin</span></a></li>
-          <li><a href="https://github.com/TrentRice" target="_blank" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-        </ul>
-      </nav>
-      <div id="main">
-        <section class="post">
-          <header class="major">
-            <h1>Predicting Whiffs: A Statcast Machine Learning Approach</h1>
-          </header>
-          <span class="image fit"><img src="images/PredictingWhiffsMain.png" alt="Predicting Whiffs" /></span>
-          
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Predicting Whiffs: A Statcast Machine Learning Approach - Trent Rice</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+	<link rel="stylesheet" href="assets/css/site.css" />
+</head>
+<body>
+	<div class="container">
+		<header class="topbar">
+			<a href="index.html" class="name">Trent Rice</a>
+			<ul class="links">
+				<li><a href="index.html#projects">Projects</a></li>
+				<li><a href="https://github.com/TrentRice" target="_blank" rel="noopener">GitHub</a></li>
+				<li><a href="https://www.linkedin.com/in/trent-rice-7a2b5428a/" target="_blank" rel="noopener">LinkedIn</a></li>
+				<li><a href="mailto:trent.rice3@yahoo.com">Email</a></li>
+			</ul>
+		</header>
+
+		<main class="narrow">
+			<a href="index.html" class="back">&larr; All projects</a>
+			<header class="article-header">
+				<h1>Predicting Whiffs: A Statcast Machine Learning Approach</h1>
+				<ul class="tags"><li>Python</li><li>Machine Learning</li><li>MLB</li></ul>
+				<div class="actions">
+					<a href="https://github.com/TrentRice/MLB-PitchbyPitch-Prediction.git" target="_blank" rel="noopener">View code on GitHub &rarr;</a>
+				</div>
+			</header>
+			<div class="hero"><img src="images/PredictingWhiffsMain.png" alt="Predicting Whiffs" /></div>
+			<article class="article">
 <h3>Introduction</h3>
 <p>In the modern era of Major League Baseball, the "Three True Outcomes", strikeouts, walks, and home runs, have come to dominate the strategic landscape. Among these, the ability to generate a swing-and-miss, or a "whiff," is perhaps the most coveted skill for a pitcher. Unlike a ball put into play, which is subject to the whims of defensive positioning and stadium dimensions, a whiff represents a total victory for the pitcher. It eliminates variables, reduces the volatility of sequencing luck, and serves as one of the most stable predictors of long-term run prevention.</p>
 
@@ -36,7 +39,7 @@
 
 <h3>Defining the Classification Problem</h3>
 <p>The objective of this project is a binary classification: predicting whether a pitch results in a <strong>Whiff (1)</strong> or <strong>No Whiff (0)</strong>. A whiff is defined using Statcast’s specific event markers, specifically <code>swinging_strike</code> and <code>swinging_strike_blocked</code>.</p>
-<img src="images/UniqueOutcomeCount.png" alt="MLB Unique" style="display: block; margin: 0 auto;" width="500">
+<img src="images/UniqueOutcomeCount.png" alt="MLB Unique">
 <p>One of the primary hurdles in this analysis is the inherent class imbalance of the dataset. As seen in the distribution of outcomes from the 2025 MLB season, whiffs represent a small minority of total pitches, typically between 10% and 15%. The vast majority of pitches result in called strikes, balls, fouls, or balls in play. In a machine learning context, this imbalance is dangerous; a naive model could achieve 85% accuracy simply by predicting "No Whiff" every time. To combat this, the modeling process required specific architectural choices, including class weighting and post-hoc calibration.</p>
 
 <h3>Data Acquisition and Feature Engineering</h3>
@@ -46,14 +49,14 @@
 <li><strong>Movement Profiles:</strong> I utilized <code>pfx_x</code> (horizontal movement) and <code>pfx_z</code> (vertical movement) to capture how much a pitch deviates from a straight line.</li>
 <li><strong>Context and Location:</strong> Whiff probability is highly contextual. I included <code>plate_x</code> and <code>plate_z</code> coordinates to map the pitch’s position in the zone, along with the count (balls and strikes).</li>
 </ul>
-<img src="images/WhiffCharecteristics.png" alt="MLB Whiff Char" style="display: block; margin: 0 auto;" width="500">
+<img src="images/WhiffCharecteristics.png" alt="MLB Whiff Char">
 <p>Because features like velocity and spin rate exist on vastly different numerical scales, I applied <code>StandardScaler</code> to all continuous inputs. This ensures the neural network treats each feature with appropriate weight, preventing high-magnitude variables from drowning out subtle movement data.</p>
 
 <h3>Modeling Approach: LogReg vs. MLP</h3>
 <p>To explore the complexity of pitch outcomes, I implemented and compared two distinct modeling architectures:</p>
 <ol>
 <li><strong>Logistic Regression (The Baseline):</strong> I began with a Logistic Regression model to establish a performance floor. This linear approach is highly interpretable and serves as a vital benchmark for more complex methods.</li>
-<img src="images/LogRegResults.png" alt="MLB LogReg" style="display: block; margin: 0 auto;" width="500">
+<img src="images/LogRegResults.png" alt="MLB LogReg">
 <li><strong>Multi-Layer Perceptron (The Neural Network):</strong> The second model is a feedforward neural network (MLP) built using PyTorch. The architecture consists of an input layer, a hidden layer with ReLU activation, and an output layer producing a single logit. The MLP is designed to capture the non-linear "interdependencies" of pitching such as how a high spin rate might be highly effective at the top of the strike zone but detrimental at the bottom.</li>
 </ol>
 
@@ -108,17 +111,17 @@
     whiff signal can be captured by linear relationships, incorporating nonlinear structure 
     yields incremental gains in both discrimination and probability calibration.
   </p>
-<img src="images/LogRegVsMLP.png" alt="MLB LogReg vs MLP" style="display: block; margin: 0 auto;" width="750">
+<img src="images/LogRegVsMLP.png" alt="MLB LogReg vs MLP">
 <h3>The Necessity of Post-hoc Calibration</h3>
 <p>While the models were successful at ranking pitches by whiff probability, their raw outputs were not initially "honest" probabilities. Due to the class weighting used during training, the models were often over-confident, pushing predicted probabilities into ranges that did not match reality. This led to the most critical phase of the project: <strong>Post-hoc Calibration via Platt Scaling</strong>.</p>
 
 <p>Calibration ensures that if a model predicts a 20% chance of a whiff, the event actually happens 20% of the time in the long run. I evaluated the results using Log Loss and Brier Score, and the improvement was dramatic:</p>
 <ul>
 <li>The <strong>MLP Raw</strong> model had a Log Loss of <strong>0.58</strong>, indicating poor probabilistic alignment.</li>
-<img src="images/RawVsPosthoc.png" alt="MLB Raw vs Post-hoc" style="display: block; margin: 0 auto;" width="500">
+<img src="images/RawVsPosthoc.png" alt="MLB Raw vs Post-hoc">
 <li>After Platt Scaling, the <strong>MLP Calibrated</strong> model’s Log Loss dropped to <strong>0.39</strong>.</li>
 </ul>
-<img src="images/RawVsPosthocStats.png" alt="MLB Raw vs Post-hoc Stats" style="display: block; margin: 0 auto;" width="500">
+<img src="images/RawVsPosthocStats.png" alt="MLB Raw vs Post-hoc Stats">
 <h3>Practical Applications in Player Evaluation</h3>
 <p>The ability to generate a well-calibrated "Expected Whiff" (xWhiff) metric has three immediate applications in a Major League front office:</p>
 <ul>
@@ -131,25 +134,14 @@
 <p>This project demonstrates that while individual pitch outcomes are subject to significant variance, the underlying probability of a whiff can be modeled with high reliability. By comparing a linear baseline to a neural network, we found that a Multi-Layer Perceptron offers superior discriminatory power. However, the most vital takeaway is that raw machine learning outputs are often insufficient; post-hoc calibration is the bridge that turns raw model scores into meaningful, actionable baseball intelligence. As Statcast data continues to grow in complexity, these calibrated models will remain the cornerstone of elite player evaluation and development.</p>
 <ul>
             <p>Full project available on <a href="https://github.com/TrentRice/MLB-PitchbyPitch-Prediction.git" target="_blank">GitHub</a>.</p>
-          </ul>        
-</section>
-      </div>
-      <footer id="footer">
-        <ul class="icons alt">
-          <li><a href="https://www.linkedin.com/in/trent-rice-7a2b5428a/" target="_blank" class="icon brands alt fa-linkedin"><span class="label">linkedin</span></a></li>
-          <li><a href="https://github.com/TrentRice" target="_blank" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-        </ul>
-      </footer>
-      <div id="copyright">
-        <ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
-      </div>
-    </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.scrollex.min.js"></script>
-    <script src="assets/js/jquery.scrolly.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
-  </body>
+          </ul>
+			</article>
+		</main>
+
+		<footer class="footer">
+			<span>Trent Rice &middot; Boston, MA</span>
+			<a href="mailto:trent.rice3@yahoo.com">trent.rice3@yahoo.com</a>
+		</footer>
+	</div>
+</body>
 </html>

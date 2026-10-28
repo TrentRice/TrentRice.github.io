@@ -1,35 +1,37 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Shooting Percentage Luck? An analysis of NHL Coach Firings - Trent Rice</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
-		<div id="wrapper" class="fade-in">
-			<header id="header">
-				<a href="index.html" class="logo">Trent Rice</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Shooting Percentage Luck? An analysis of NHL Coach Firings - Trent Rice</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+	<link rel="stylesheet" href="assets/css/site.css" />
+</head>
+<body>
+	<div class="container">
+		<header class="topbar">
+			<a href="index.html" class="name">Trent Rice</a>
+			<ul class="links">
+				<li><a href="index.html#projects">Projects</a></li>
+				<li><a href="https://github.com/TrentRice" target="_blank" rel="noopener">GitHub</a></li>
+				<li><a href="https://www.linkedin.com/in/trent-rice-7a2b5428a/" target="_blank" rel="noopener">LinkedIn</a></li>
+				<li><a href="mailto:trent.rice3@yahoo.com">Email</a></li>
+			</ul>
+		</header>
+
+		<main class="narrow">
+			<a href="index.html" class="back">&larr; All projects</a>
+			<header class="article-header">
+				<h1>Shooting Percentage Luck? An analysis of NHL Coach Firings</h1>
+				<ul class="tags"><li>R</li><li>Regression</li><li>NHL</li></ul>
+				<div class="actions">
+					<a href="https://github.com/TrentRice/NHL-CoachFiring-Analysis-R.git" target="_blank" rel="noopener">View code on GitHub &rarr;</a>
+				</div>
 			</header>
-			<nav id="nav">
-				<ul class="links">
-					<li><a href="index.html">Projects</a></li>
-					<li class="active"><a href="project1.html">Shooting % Bad Luck</a></li>
-				</ul>
-				<ul class="icons">
-					<li><a href="https://www.linkedin.com/in/trent-rice-7a2b5428a/" target="_blank" class="icon brands alt fa-linkedin"><span class="label">linkedin</span></a></li>
-					<li><a href="https://github.com/TrentRice" target="_blank" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-				</ul>
-			</nav>
-			<div id="main">
-				<section class="post">
-					<header class="major">
-						<h1>Shooting Percentage Luck? An analysis of NHL Coach Firings</h1>
-					</header>
-					<span class="image fit"><img src="images/NHLCoachFiring.png" alt="NHLCoachFiring" /></span>
-					<p>
-					</p>
+			<div class="hero"><img src="images/NHLCoachFiring.png" alt="NHLCoachFiring" /></div>
+			<article class="article">
 <h3>Introduction</h3>
   <p>Last season, 25% of coaches in the NHL were fired either during or after the year. This reflects a trend in the NHL as front offices do not have patience to give a coach a long leash, leading to quick decisions. Teams go on cold runs, the blame is put on the coach, and they get fired, simple as that.</p>
   <p>This forms the basis of why I decided to conduct the analysis detailed in this article: I wanted to know whether these constant firings were warranted or if bad luck was in play. In hockey analytics, few stats spark as much debate as shooting percentage. Some argue it’s mostly driven by luck, subject to random bounces, hot streaks, and goalie performance while others believe it reflects real skill, especially when maintained over time. Regardless, shooting percentage (S%) plays a role in how teams are evaluated and, potentially, how head coaches are judged.</p>
@@ -61,11 +63,11 @@
   <ul>
     <li>Regression of 1st half vs. 2nd half S%: <strong>0.076</strong> (very low impact)</li>
     <li>Regression plot: Shows sporadic results; likely regression to the mean</li>
-    <img src="images/RegressiontoMeanSP.png" alt="NHL RegMeannSP" style="display: block; margin: 0 auto;" width="500">
+    <img src="images/RegressiontoMeanSP.png" alt="NHL RegMeannSP">
     <li>Residuals vs. Fitted: Flat line indicates linear relationship</li>
-    <img src="images/ResidualsvsFittedSP.png" alt="NHL ResidualsSP" style="display: block; margin: 0 auto;" width="500">
+    <img src="images/ResidualsvsFittedSP.png" alt="NHL ResidualsSP">
     <li>Q-Q plot: Even distribution confirms model fit</li>
-    <img src="images/QQSP.png" alt="NHL QQSP" style="display: block; margin: 0 auto;" width="500">
+    <img src="images/QQSP.png" alt="NHL QQSP">
   </ul>
 
   <h4>2. Shooting Percentage Does Help Win Games</h4>
@@ -76,19 +78,19 @@
     <li>Regression R²: <strong>0.24</strong> (24% of win% variance explained by S%)</li>
     <li>Relationship plot: Upward trend between S% and win%</li>
   </ul>
-  <img src="images/SPvsWPNHL.png" alt="SPvsWPNHL" style="display: block; margin: 0 auto;" width="500">
+  <img src="images/SPvsWPNHL.png" alt="SPvsWPNHL">
 
   <h4>3. Unlucky Coaches Are Fired More Often</h4>
   <p>This was one of the most striking results. Coaches with lower-than-average S% had significantly higher firing rates even when win percentage was controlled.</p>
   <ul>
     <li>Firing rate among "unlucky" coaches: <strong>37.4%</strong></li>
     <li>Firing rate among "lucky" coaches: <strong>27.3%</strong></li>
-    <img src="images/FiringRateNHL.png" alt="FiringRateNHL" style="display: block; margin: 0 auto;" width="500">
+    <img src="images/FiringRateNHL.png" alt="FiringRateNHL">
 
     <li>Bottom 10 coaching seasons by S% luck: <strong>80%</strong> fired</li>
-    <img src="images/Bottom10CoachNHL.png" alt="Bottom10CoachNHL" style="display: block; margin: 0 auto;" width="500">
+    <img src="images/Bottom10CoachNHL.png" alt="Bottom10CoachNHL">
     <li>Top 9 coaching seasons by S% luck: <strong>11.1%</strong> fired</li>
-    <img src="images/Top10CoachNHL.png" alt="Top10CoachNHL" style="display: block; margin: 0 auto;" width="500">
+    <img src="images/Top10CoachNHL.png" alt="Top10CoachNHL">
   </ul>
   <p>These results suggest that even random variance in S% can impact a coach’s career, raising concerns about fairness and evaluation standards.</p>
   <h3>Visualization & Code Access</h3>
@@ -107,24 +109,13 @@
   <h3>Conclusion</h3>
   <p>This project confirms that shooting percentage is not a skill-driven stat at the team level, but it still matters both on the scoreboard and in the coach's office. Teams with high shooting percentages tend to win more. Yet, since S% fluctuates heavily and lacks stability, its role in coaching evaluations may be disproportionate.</p>
   <p>Organizations should take note: firing a coach over poor winning numbers over a stretch of games may be blaming the wrong factor as cold team shooting is a heavy factor. This analysis aims to show the randomness of shooting percentage and the impact on winning that occurs. In a league where goals can hinge on inches and bounces, decision-makers must look deeper than surface stats to build long-term success.</p>
-</section>
-			</div>
-			<footer id="footer">
-				<ul class="icons alt">
-					<li><a href="https://www.linkedin.com/in/trent-rice-7a2b5428a/" target="_blank" class="icon brands alt fa-linkedin"><span class="label">linkedin</span></a></li>
-					<li><a href="https://github.com/TrentRice" target="_blank" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-				</ul>
-			</footer>
-			<div id="copyright">
-				<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
-			</div>
-		</div>
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/jquery.scrollex.min.js"></script>
-		<script src="assets/js/jquery.scrolly.min.js"></script>
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
-	</body>
+			</article>
+		</main>
+
+		<footer class="footer">
+			<span>Trent Rice &middot; Boston, MA</span>
+			<a href="mailto:trent.rice3@yahoo.com">trent.rice3@yahoo.com</a>
+		</footer>
+	</div>
+</body>
 </html>
